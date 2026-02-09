@@ -18,5 +18,8 @@ class DataLoader:
 
 if __name__ == "__main__":
     loader = DataLoader()
-    df = loader.load_data(r"../data/yellow_tripdata_2015-01.csv")
-    print(df.head())
+    df = loader.load_data(r"..\data\WA_Fn-UseC_-Telco-Customer-Churn.csv")
+    if df.empty:
+        print("DataFrame is empty")
+    else:
+        print(df.head())
