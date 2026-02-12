@@ -1,4 +1,3 @@
-from openpyxl.chart.title import title_maker
 import numpy as np
 import pandas as pd
 from utils import is_datetime_column
@@ -32,7 +31,16 @@ def profile_column(series: pd.Series) -> dict:
             return profile
         except:
             pass
+
+        avg_length = non_null.astype(str).str.len().mean()
+        profile["avg_length"] = avg_length
         
+        if avg_length > 30:
+            profile["inferred_type"] = "text"
+        else:
+            profile["inferred_type"] = "categorical"
+        
+        return profile
     except Exception as e:
         print(f"Error profiling column: {e}")
         return None
